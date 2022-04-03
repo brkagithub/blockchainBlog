@@ -90,7 +90,7 @@ export const getStaticProps: GetStaticProps<BlogPageProps> = async ({
       articleSlug: slug,
       userIdsThatLiked: userIdsThatLiked,
     },
-    revalidate: 24 * 60 * 60,
+    revalidate: 10,
   };
 };
 
