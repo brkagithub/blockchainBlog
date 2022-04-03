@@ -1,9 +1,10 @@
-import type { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { useMoralisCloudFunction, useMoralisQuery } from "react-moralis";
 import { Button, Grid, Typography, Box } from "@mui/material";
-
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import Moralis from "moralis/node";
+import { getAllArticles } from "@/helpers/articles";
 import { LayoutItemLoading, LayoutItemSafe } from "@/components/UI/Layout";
 import ScrollableTags from "@/components/UI/ScrollableTags";
 
@@ -14,16 +15,29 @@ interface IUsernameId {
   id: string;
 }
 
-const Home: NextPage = () => {
+interface IArticle {
+  id: any;
+  isValidated: boolean;
+  slug: string;
+  previewPictureURL: string;
+  title: string;
+  authorID: any;
+}
+
+type HomePageProps = {
+  dataArticles: any;
+};
+
+const Home: NextPage<HomePageProps> = (props) => {
   const { data: dataUsernamesIds } =
     useMoralisCloudFunction("getUsernamesAndIds");
 
-  const { data: dataArticles } = useMoralisQuery(
+  /*const { data: dataArticles } = useMoralisQuery(
     "Article",
     (query) => query.ascending("name"),
     [],
     {}
-  );
+  );*/
 
   const { user, isAuth, logout } = useAuthRedirect();
 
@@ -39,13 +53,13 @@ const Home: NextPage = () => {
           columnSpacing={{ xs: 2, md: 3 }}
           columns={{ xs: 1, sm: 2, md: 4 }} //maybe it can become flexbox with XL ?
         >
-          {dataArticles?.map(
+          {props.dataArticles?.map(
             (
-              article //maybe Link can have prefetch=false
+              article: IArticle //maybe Link can have prefetch=false
             ) =>
-              article.get("isValidated") == true ? (
+              article.isValidated == true ? (
                 <Grid item xs={1} sm={1} md={1} key={article.id}>
-                  <Link key={article.id} href={`/blog/${article.get("slug")}`}>
+                  <Link key={article.id} href={`/blog/${article.slug}`}>
                     <Box key={article.id} sx={{ cursor: "pointer" }}>
                       <img
                         style={{
@@ -56,7 +70,7 @@ const Home: NextPage = () => {
                         }}
                         width="200"
                         height="200"
-                        src={article.get("previewPictureURL")}
+                        src={article.previewPictureURL}
                       ></img>
 
                       <Typography
@@ -66,7 +80,7 @@ const Home: NextPage = () => {
                           fontSize: "1.5rem",
                         }}
                       >
-                        {article.get("title")}
+                        {article.title}
                       </Typography>
                       <Typography
                         variant="body1"
@@ -78,7 +92,7 @@ const Home: NextPage = () => {
                         Post by{" "}
                         {(dataUsernamesIds as Array<IUsernameId>)?.map(
                           (usernameAndId) =>
-                            usernameAndId.id == article.get("author")?.id
+                            usernameAndId.id == article.authorID
                               ? usernameAndId.username
                               : ""
                         )}
@@ -100,3 +114,14 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
+  const dataArticles = await getAllArticles(Moralis);
+
+  return {
+    props: {
+      dataArticles,
+    },
+    revalidate: 10,
+  };
+};

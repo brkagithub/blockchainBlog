@@ -83,6 +83,29 @@ export const getAllArticleSlugsMoralis = async (
   }
 };
 
+export const getAllArticles = async (Moralis: MoralisLib) => {
+  try {
+    await Moralis.start({
+      appId: env.MORALIS_APP_ID,
+      serverUrl: env.MORALIS_SERVER_URL,
+      masterKey: process.env.MORALIS_MASTER_KEY,
+    });
+    const query = new Moralis.Query("Article");
+    query.ascending("name");
+    const articles: any = await query.find({ useMasterKey: true });
+    return articles.map((article: any) => ({
+      id: article.id,
+      isValidated: article.get("isValidated"),
+      slug: article.get("slug"),
+      previewPictureURL: article.get("previewPictureURL"),
+      title: article.get("title"),
+      authorID: article.get("author")?.id ? article.get("author").id : "",
+    }));
+  } catch (e) {
+    console.log("ERROR!", e);
+    return {};
+  }
+};
 export const setArticleMoralis = async (
   slug: string,
   title: string,
