@@ -34,7 +34,7 @@ You can log in with a crypto wallet (this functionality was made possible by Mor
 ## All articles page preview (Night Mode is on here)
 ![image](images/nightModeAllArticles.png)
 
-The articles are fetched with getStaticProps and all content appears in SEO (Search engine optimization). You can click any article to read it.
+The articles are fetched with getStaticProps (with revalidate) and all content appears in SEO (Search engine optimization). You can click any article to read it.
 
 
 ## Write article page preview
