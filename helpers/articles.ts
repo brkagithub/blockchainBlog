@@ -141,7 +141,7 @@ export const setArticleMoralis = async (
     newArticle.set("author", author);
     newArticle.set("previewPictureURL", previewPictureURL);
 
-    newArticle.save();
+    await newArticle.save();
     return "Created " + title;
   } catch (e) {
     console.log("ERROR!", e);

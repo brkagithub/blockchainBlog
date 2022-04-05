@@ -122,6 +122,6 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
     props: {
       dataArticles,
     },
-    revalidate: 1,
+    revalidate: 10,
   };
 };
