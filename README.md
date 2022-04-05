@@ -24,4 +24,8 @@ Developed basic features of the website such as crypto wallet authentication, br
 
 I adopted modern web development tools such as React and NextJS and learnt a lot about concepts such as React state, hooks, incremental static regeneration, server side rendering etc.
 
-Website coming soon!!!
+Deploying Website soon!!!
+
+Log in page preview
+![image](https://prnt.sc/95NFBpUZJSyY)
+
