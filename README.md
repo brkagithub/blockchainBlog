@@ -40,7 +40,7 @@ The articles are fetched with getStaticProps (with revalidate) and all content a
 ## Write article page preview
 ![image](images/writeArticle.png)
 
-You can write your own article by clicking at the "Write" button in the navbar. I used MDXjs - a JS library that takes Markdown input and renders it for the user. You have to use Markdown to write your articles, but I'm planning to add a Rich text editor too to make it easier for the users. 
+You can write your own article by clicking the "Write" button in the navbar. I used MDXjs - a JS library that takes Markdown input and renders it for the user. You have to use Markdown to write your articles, but I'm planning to add a Rich text editor too to make it easier for the users. 
 
 ## Read article page preview (Night Mode is on here)
 ![image](images/readArticle.png)
