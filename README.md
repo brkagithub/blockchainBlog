@@ -29,3 +29,20 @@ Deploying Website soon!!!
 Log in page preview
 ![image](images/loginPreview.png)
 
+You can log in with a crypto wallet (this functionality was made possible by Moralis SDK) or you can log in with just your username and your password. Your credentials are stored in the MongoDB database and your passwords are safe.
+
+All articles page preview (Night Mode is on here)
+![image](images/nightModeAllArticles.png)
+
+The articles are fetched with getStaticProps and all content appears in SEO (Search engine optimization). You can click any article to read it.
+
+
+Write article page preview
+![image](images/writeArticle.png)
+
+You can write your own article by clicking at the "Write" button in the navbar. I used MDXjs - a JS library that takes Markdown input and renders it for the user. You have to use Markdown to write your articles, but I'm planning to add a Rich text editor too to make it easier for the users. 
+
+Read article page preview (Night Mode is on here)
+![image](images/readArticle.png)
+
+By clicking at an article, you are shown a page with the rendered Markdown content. It's possible to like and unlike articles, and the rating of every article is stored in the database and fetched whenever it is shown to you.
