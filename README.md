@@ -27,5 +27,5 @@ I adopted modern web development tools such as React and NextJS and learnt a lot
 Deploying Website soon!!!
 
 Log in page preview
-![image](images/loginPreview)
+![image](images/loginPreview.png)
 
